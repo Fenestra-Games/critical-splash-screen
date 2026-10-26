@@ -67,9 +67,10 @@ class GlobalSettingsConfig extends foundry.applications.api.HandlebarsApplicatio
 ) {
   static DEFAULT_OPTIONS = {
     id: "css-global-settings",
+    classes: ["css-settings"],
     tag: "form",
     window: {
-      title: "Critical Splash Screens — Global Settings",
+      title: "CSS.Global.Title",
       icon: "fas fa-sliders-h",
       resizable: true
     },
@@ -138,7 +139,7 @@ class GlobalSettingsConfig extends foundry.applications.api.HandlebarsApplicatio
     await game.settings.set(MODULE_ID, "critSoundFolder", data.critSoundFolder ?? "");
     await game.settings.set(MODULE_ID, "fumbleSoundFolder", data.fumbleSoundFolder ?? "");
 
-    ui.notifications.info("Critical Splash Screens: global settings saved.");
+    ui.notifications.info(game.i18n.localize("CSS.Global.Saved"));
   }
 }
 
@@ -172,9 +173,10 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
 
   static DEFAULT_OPTIONS = {
     id: "css-character-config",
+    classes: ["css-settings"],
     tag: "form",
     window: {
-      title: "Critical Splash Screens — Per-Character Setup",
+      title: "CSS.Character.Title",
       icon: "fas fa-users",
       resizable: true
     },
@@ -204,7 +206,7 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
   async _prepareContext() {
     const rows = this.rows.map((row) => ({
       ...row,
-      actorName: row.actorId ? (game.actors.get(row.actorId)?.name ?? "(unresolved actor)") : ""
+      actorName: row.actorId ? (game.actors.get(row.actorId)?.name ?? game.i18n.localize("CSS.Character.UnresolvedActor")) : ""
     }));
 
     return { rows };
@@ -274,7 +276,7 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
       const updateName = () => {
         if (!nameDisplay) return;
         const id = resolveActorIdFromInput(input.value);
-        nameDisplay.textContent = id ? (game.actors.get(id)?.name ?? "") : (input.value ? "(not found)" : "");
+        nameDisplay.textContent = id ? (game.actors.get(id)?.name ?? "") : (input.value ? game.i18n.localize("CSS.Character.NotFound") : "");
       };
 
       input.addEventListener("input", updateName);
@@ -300,7 +302,7 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
 
         const actor = fromUuidSync(data.uuid);
         if (!actor) {
-          ui.notifications.warn("Critical Splash Screens: couldn't resolve that dropped actor.");
+          ui.notifications.warn(game.i18n.localize("CSS.Character.DropFailed"));
           return;
         }
 
@@ -340,7 +342,7 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
     await game.settings.set(MODULE_ID, "fumbleAnimations", fumbleAnimations);
     await game.settings.set(MODULE_ID, "criticalThresholds", criticalThresholds);
 
-    ui.notifications.info("Critical Splash Screens: character setup saved.");
+    ui.notifications.info(game.i18n.localize("CSS.Character.Saved"));
   }
 }
 
@@ -377,14 +379,14 @@ Hooks.once("init", () => {
     scope: "world",
     config: false,
     type: Object,
-    default: { file: "modules/critical-splash-screen/images/default-crit.png", ...DEFAULT_ANIMATION_ENTRY }
+    default: { file: "modules/critical-splash-screen/images/DefaultCritP4.webp", ...DEFAULT_ANIMATION_ENTRY }
   });
 
   game.settings.register(MODULE_ID, "defaultFumbleAnimation", {
     scope: "world",
     config: false,
     type: Object,
-    default: { file: "modules/critical-splash-screen/images/default-fumble.png", ...DEFAULT_ANIMATION_ENTRY }
+    default: { file: "modules/critical-splash-screen/images/DefaultFumbleP4.webp", ...DEFAULT_ANIMATION_ENTRY }
   });
 
   game.settings.register(MODULE_ID, "deathSoundFolder", {
@@ -409,18 +411,18 @@ Hooks.once("init", () => {
   });
 
   game.settings.registerMenu(MODULE_ID, "globalSettingsMenu", {
-    name: "Global Settings",
-    label: "Open Global Settings",
-    hint: "Screen scale, default crit/fumble images, and death/crit/fumble sound folders.",
+    name: "CSS.Global.MenuName",
+    label: "CSS.Global.MenuLabel",
+    hint: "CSS.Global.MenuHint",
     icon: "fas fa-sliders-h",
     type: GlobalSettingsConfig,
     restricted: true
   });
 
   game.settings.registerMenu(MODULE_ID, "characterConfigMenu", {
-    name: "Per-Character Setup",
-    label: "Open Per-Character Setup",
-    hint: "Add characters (paste an Actor UUID or drag one in) and set their crit/fumble images, sounds, and crit threshold.",
+    name: "CSS.Character.MenuName",
+    label: "CSS.Character.MenuLabel",
+    hint: "CSS.Character.MenuHint",
     icon: "fas fa-users",
     type: CharacterConfig,
     restricted: true

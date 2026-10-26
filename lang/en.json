@@ -1,0 +1,46 @@
+{
+  "CSS": {
+    "Global": {
+      "Title": "Critical Splash Screens: Global Settings",
+      "MenuName": "Global Settings",
+      "MenuLabel": "Open Global Settings",
+      "MenuHint": "Screen scale, default crit and fumble images, and death, crit, and fumble sound folders.",
+      "Intro": "Screen scale, default images, and sound folders.",
+      "Display": "Display",
+      "Scale": "Screen scale",
+      "ScaleHint": "Fraction of the screen the image fills, for example 0.3 is 30%.",
+      "DefaultCrit": "Default crit image",
+      "DefaultFumble": "Default fumble image",
+      "DefaultHint": "Used when a character is not set up.",
+      "SoundFolders": "Sound folders",
+      "DeathFolder": "Death sound folder",
+      "DeathFolderHint": "A random file plays when a token gets the \"dead\" status.",
+      "CritFolder": "Crit sound folder",
+      "CritFolderHint": "Backup: a random file plays when a character has no custom crit sound.",
+      "FumbleFolder": "Fumble sound folder",
+      "FumbleFolderHint": "Backup: a random file plays when a character has no custom fumble sound.",
+      "Saved": "Critical Splash Screens: global settings saved."
+    },
+    "Character": {
+      "Title": "Critical Splash Screens: Per-Character Setup",
+      "MenuName": "Per-Character Setup",
+      "MenuLabel": "Open Per-Character Setup",
+      "MenuHint": "Add characters (paste an Actor UUID or drag one in) and set their crit and fumble images, sounds, and crit threshold.",
+      "Intro": "Drag an actor onto a row or paste an Actor UUID. Leave \"Crit on\" blank for a normal natural 20, or the character's own critical threshold (for example Improved Critical) if lower. Sounds play even when no image is set for that character.",
+      "ActorPlaceholder": "Drag actor here or paste UUID/id",
+      "CritOn": "Crit on",
+      "CritOnTitle": "Crit on this value or higher",
+      "Remove": "Remove",
+      "Crit": "Crit",
+      "Fumble": "Fumble",
+      "Image": "Image",
+      "Sound": "Sound",
+      "Add": "Add character",
+      "UnresolvedActor": "(unresolved actor)",
+      "NotFound": "(not found)",
+      "DropFailed": "Critical Splash Screens: couldn't resolve that dropped actor.",
+      "Saved": "Critical Splash Screens: character setup saved."
+    },
+    "Save": "Save"
+  }
+}

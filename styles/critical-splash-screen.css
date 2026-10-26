@@ -1,0 +1,21 @@
+/* Critical Splash Screens: settings windows. Matches the DND QuickPay layout. */
+.css-settings .css-pane { display: flex; flex-direction: column; gap: 10px; padding: 10px 12px 12px; line-height: 1.45; letter-spacing: normal; overflow-y: auto; height: 100%; box-sizing: border-box; }
+.css-settings .css-note { margin: 0; opacity: 0.8; }
+.css-settings .css-section { display: flex; flex-direction: column; border: 1px solid var(--color-border-light-tertiary, #8884); border-radius: 6px; padding: 4px 12px 8px; }
+.css-settings .css-section h3 { margin: 6px 0 4px; padding: 0 0 4px; border-bottom: 1px solid var(--color-border-light-tertiary, #8884); font-size: 1rem; line-height: 1.3; }
+.css-settings .css-row { display: flex; flex-direction: column; gap: 2px; padding: 6px 0; margin: 0; }
+.css-settings .css-row + .css-row { border-top: 1px solid var(--color-border-light-tertiary, #8882); }
+.css-settings .css-row-label { font-weight: 500; }
+.css-settings .css-row small { opacity: 0.75; line-height: 1.35; }
+.css-settings .css-row .form-fields { display: flex; gap: 6px; align-items: center; }
+.css-settings .css-row .form-fields input[type="text"] { flex: 1 1 auto; min-width: 0; }
+.css-settings .css-row input[type="number"] { width: 6rem; text-align: right; }
+.css-settings .css-actor { display: flex; align-items: center; gap: 8px; flex: 1 1 auto; min-width: 0; }
+.css-settings .css-actor input { flex: 1 1 auto; min-width: 0; }
+.css-settings .css-actor-name { flex: 0 0 auto; font-style: italic; opacity: 0.85; white-space: nowrap; max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
+.css-settings .css-card-head { display: flex; align-items: center; gap: 10px; }
+.css-settings .css-threshold { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.css-settings .css-threshold input { width: 3.5rem; text-align: center; }
+.css-settings .css-card-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.css-settings .css-gold { color: #d4a017; }
+.css-settings .css-buttons { display: flex; justify-content: flex-end; gap: 8px; }
