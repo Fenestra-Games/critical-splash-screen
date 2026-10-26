@@ -39,7 +39,9 @@
       "UnresolvedActor": "(unresolved actor)",
       "NotFound": "(not found)",
       "DropFailed": "Critical Splash Screens: couldn't resolve that dropped actor.",
-      "Saved": "Critical Splash Screens: character setup saved."
+      "Saved": "Critical Splash Screens: character setup saved.",
+      "Actor": "Actor",
+      "NewCharacter": "New character"
     },
     "Save": "Save"
   }

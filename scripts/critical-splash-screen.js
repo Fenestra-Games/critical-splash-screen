@@ -167,7 +167,8 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
       critSound: animations[id]?.sound ?? "",
       fumbleFile: fumbleAnimations[id]?.file ?? "",
       fumbleSound: fumbleAnimations[id]?.sound ?? "",
-      critThreshold: criticalThresholds[id] ?? ""
+      critThreshold: criticalThresholds[id] ?? "",
+      open: false
     }));
   }
 
@@ -204,10 +205,15 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
   };
 
   async _prepareContext() {
-    const rows = this.rows.map((row) => ({
-      ...row,
-      actorName: row.actorId ? (game.actors.get(row.actorId)?.name ?? game.i18n.localize("CSS.Character.UnresolvedActor")) : ""
-    }));
+    const rows = this.rows.map((row) => {
+      const actor = row.actorId ? game.actors.get(row.actorId) : null;
+      return {
+        ...row,
+        actorName: actor?.name
+          ?? (row.actorId ? game.i18n.localize("CSS.Character.UnresolvedActor") : game.i18n.localize("CSS.Character.NewCharacter")),
+        actorImg: actor?.prototypeToken?.texture?.src ?? actor?.img ?? "icons/svg/mystery-man.svg"
+      };
+    });
 
     return { rows };
   }
@@ -228,14 +234,15 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
         critSound: get("critSound"),
         fumbleFile: get("fumbleFile"),
         fumbleSound: get("fumbleSound"),
-        critThreshold: get("critThreshold")
+        critThreshold: get("critThreshold"),
+        open: form.querySelector(`details[data-row="${index}"]`)?.open ?? row.open
       };
     });
   }
 
   static onAddRow() {
     this._syncRowsFromDOM();
-    this.rows.push({ actorId: "", critFile: "", critSound: "", fumbleFile: "", fumbleSound: "", critThreshold: "" });
+    this.rows.push({ actorId: "", critFile: "", critSound: "", fumbleFile: "", fumbleSound: "", critThreshold: "", open: true });
     this.render();
   }
 
@@ -271,12 +278,17 @@ class CharacterConfig extends foundry.applications.api.HandlebarsApplicationMixi
 
     const inputs = this.element.querySelectorAll("input[data-actor-drop]");
     for (const input of inputs) {
-      const nameDisplay = input.closest(".actor-id-field")?.querySelector(".actor-name-display");
+      const card = input.closest("details");
+      const nameDisplay = card?.querySelector(".css-card-name");
+      const imgDisplay = card?.querySelector(".css-card-img");
 
       const updateName = () => {
         if (!nameDisplay) return;
         const id = resolveActorIdFromInput(input.value);
-        nameDisplay.textContent = id ? (game.actors.get(id)?.name ?? "") : (input.value ? game.i18n.localize("CSS.Character.NotFound") : "");
+        const actor = id ? game.actors.get(id) : null;
+        nameDisplay.textContent = actor?.name
+          ?? (input.value ? game.i18n.localize("CSS.Character.NotFound") : game.i18n.localize("CSS.Character.NewCharacter"));
+        if (imgDisplay) imgDisplay.src = actor?.prototypeToken?.texture?.src ?? actor?.img ?? "icons/svg/mystery-man.svg";
       };
 
       input.addEventListener("input", updateName);

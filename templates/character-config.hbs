@@ -2,57 +2,64 @@
   <p class="css-note">{{localize "CSS.Character.Intro"}}</p>
 
   {{#each rows}}
-  <section class="css-section">
-    <div class="css-row css-card-head">
-      <div class="css-actor actor-id-field">
-        <input type="text" data-actor-drop name="rows.{{@index}}.actorId" value="{{actorId}}"
-               placeholder="{{localize "CSS.Character.ActorPlaceholder"}}">
-        <span class="css-actor-name actor-name-display">{{actorName}}</span>
-      </div>
-      <div class="css-threshold">
-        <label for="crit-threshold-{{@index}}" title="{{localize "CSS.Character.CritOnTitle"}}">{{localize "CSS.Character.CritOn"}}</label>
-        <input type="number" id="crit-threshold-{{@index}}" name="rows.{{@index}}.critThreshold"
-               value="{{critThreshold}}" min="2" max="20" placeholder="20">
-      </div>
+  <details class="css-card" data-row="{{@index}}" {{#if open}}open{{/if}}>
+    <summary class="css-card-summary">
+      <img class="css-card-img" src="{{actorImg}}" alt="">
+      <span class="css-card-name">{{actorName}}</span>
+      {{#if critThreshold}}<span class="css-badge" title="{{localize "CSS.Character.CritOnTitle"}}">{{localize "CSS.Character.CritOn"}} {{critThreshold}}+</span>{{/if}}
       <button type="button" data-action="deleteRow" data-index="{{@index}}" title="{{localize "CSS.Character.Remove"}}"><i class="fas fa-trash"></i></button>
-    </div>
-    <div class="css-card-body">
-      <div>
-        <h3>{{localize "CSS.Character.Crit"}}</h3>
-        <div class="css-row">
-          <span class="css-row-label">{{localize "CSS.Character.Image"}}</span>
-          <div class="form-fields">
-            <input type="text" name="rows.{{@index}}.critFile" value="{{critFile}}">
-            <button type="button" data-action="pickImage" data-target="rows.{{@index}}.critFile"><i class="fas fa-file-import"></i></button>
+    </summary>
+    <div class="css-card-content">
+      <div class="css-row css-card-head">
+        <div class="css-actor actor-id-field">
+          <label>{{localize "CSS.Character.Actor"}}</label>
+          <input type="text" data-actor-drop name="rows.{{@index}}.actorId" value="{{actorId}}"
+                 placeholder="{{localize "CSS.Character.ActorPlaceholder"}}">
+        </div>
+        <div class="css-threshold">
+          <label for="crit-threshold-{{@index}}" title="{{localize "CSS.Character.CritOnTitle"}}">{{localize "CSS.Character.CritOn"}}</label>
+          <input type="number" id="crit-threshold-{{@index}}" name="rows.{{@index}}.critThreshold"
+                 value="{{critThreshold}}" min="2" max="20" placeholder="20">
+        </div>
+      </div>
+      <div class="css-card-body">
+        <div>
+          <h3>{{localize "CSS.Character.Crit"}}</h3>
+          <div class="css-row">
+            <span class="css-row-label">{{localize "CSS.Character.Image"}}</span>
+            <div class="form-fields">
+              <input type="text" name="rows.{{@index}}.critFile" value="{{critFile}}">
+              <button type="button" data-action="pickImage" data-target="rows.{{@index}}.critFile"><i class="fas fa-file-import"></i></button>
+            </div>
+          </div>
+          <div class="css-row">
+            <span class="css-row-label">{{localize "CSS.Character.Sound"}}</span>
+            <div class="form-fields">
+              <input type="text" name="rows.{{@index}}.critSound" value="{{critSound}}">
+              <button type="button" data-action="pickImage" data-target="rows.{{@index}}.critSound" data-picker-type="audio"><i class="fas fa-music"></i></button>
+            </div>
           </div>
         </div>
-        <div class="css-row">
-          <span class="css-row-label">{{localize "CSS.Character.Sound"}}</span>
-          <div class="form-fields">
-            <input type="text" name="rows.{{@index}}.critSound" value="{{critSound}}">
-            <button type="button" data-action="pickImage" data-target="rows.{{@index}}.critSound" data-picker-type="audio"><i class="fas fa-music"></i></button>
+        <div>
+          <h3>{{localize "CSS.Character.Fumble"}}</h3>
+          <div class="css-row">
+            <span class="css-row-label">{{localize "CSS.Character.Image"}}</span>
+            <div class="form-fields">
+              <input type="text" name="rows.{{@index}}.fumbleFile" value="{{fumbleFile}}">
+              <button type="button" data-action="pickImage" data-target="rows.{{@index}}.fumbleFile"><i class="fas fa-file-import"></i></button>
+            </div>
+          </div>
+          <div class="css-row">
+            <span class="css-row-label">{{localize "CSS.Character.Sound"}}</span>
+            <div class="form-fields">
+              <input type="text" name="rows.{{@index}}.fumbleSound" value="{{fumbleSound}}">
+              <button type="button" data-action="pickImage" data-target="rows.{{@index}}.fumbleSound" data-picker-type="audio"><i class="fas fa-music"></i></button>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <h3>{{localize "CSS.Character.Fumble"}}</h3>
-        <div class="css-row">
-          <span class="css-row-label">{{localize "CSS.Character.Image"}}</span>
-          <div class="form-fields">
-            <input type="text" name="rows.{{@index}}.fumbleFile" value="{{fumbleFile}}">
-            <button type="button" data-action="pickImage" data-target="rows.{{@index}}.fumbleFile"><i class="fas fa-file-import"></i></button>
-          </div>
-        </div>
-        <div class="css-row">
-          <span class="css-row-label">{{localize "CSS.Character.Sound"}}</span>
-          <div class="form-fields">
-            <input type="text" name="rows.{{@index}}.fumbleSound" value="{{fumbleSound}}">
-            <button type="button" data-action="pickImage" data-target="rows.{{@index}}.fumbleSound" data-picker-type="audio"><i class="fas fa-music"></i></button>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+  </details>
   {{/each}}
 
   <footer class="css-buttons">
